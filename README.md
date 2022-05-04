@@ -1,10 +1,9 @@
 # cs
 repo for all projects done in class 
 
-[hopPass]
-
-Dev enviornment:
+hopPass
 --------------------
+Dev enviornment:
 machine: MacbookPro 2020
 chip: M1
 OS: macOS Monterey
