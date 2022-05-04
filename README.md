@@ -34,4 +34,10 @@ then finally linking for the final binary.)
         when compiling the program, what worked for me was the above process.
         - ld: symbol(s) not found for architecture arm64 was an error log I ran into alot. What this basically means is that your compiler doesnt know where a 
         complex data structure you are reffering to is (typically due to the fact you are linking/referening files wrong). For me, this was mainly spelling errors.
-        
+            
+- What next?
+            - covering more of the edgecases (this was built in an evening before it was due so obviously there are hole)
+            - Creating a menu class to further abstract the APIs from the main program
+            - Create a UI (IamGUI or some other library)
+            - Further generalize library APIs
+            
