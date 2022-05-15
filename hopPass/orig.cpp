@@ -1,19 +1,3 @@
-
-/********************************************************************
-# Author:           Gianni Crivello
-#Contact:           gianni.crivello@pcc.edu
-# Lab:              
-# Date:             05/15/2022
-# Description:     HopPass - a payment / inventory system used for a train 
-
-# Input:           strings for user input 
-# Output:          formatted strings guiding user through choices 
-# Sources:        N/A 
-#******************************************************************************/
-
-
-
-
 #include<iostream>
 #include <iomanip>
 #include <string>
@@ -71,12 +55,8 @@ double ShoppingCart::getMenuItem(std::string id) {
 	for (int i=0; i < menu.menuItems.size(); i++) {
 		if (std::get<0>(menu.menuItems[i]) == id) {
 			return std::get<1>(menu.menuItems[i]); 
-		} else {
-			std::cout << "no menu item of that id found";
-			return 0;
-		}
+		} 
 	}
-	return 0;
 }
 
 
@@ -128,7 +108,7 @@ void handleAddingToCart(ShoppingCart cart, int numTickets, double priceOfTicket)
 	}else if (amountToFreeRides < 0) {
 		std::cout << "you have reached max spend, we are refunding you " << amountToFreeRides << " and you have also earned a token for free rides for the month" << std::endl; 
 	} else {
-		std::cout << "something went wrong";
+		std::cout << "Something went wrong";
 	}
 }
 void handleChoice(std::string item, int maxSpend) {
@@ -151,10 +131,9 @@ void handleChoice(std::string item, int maxSpend) {
 		for (int i=0; i < menuItemsList.size(); i++) {
 			
 			std::cout << std::get<1>(menuItemsList[i]) << std::setw(10) << std::get<0>(menuItemsList[i]) << std::endl;
-			std::cout << std::get<0>(menuItemsList[i]) << std::endl;
 
 		}
-		std::cout << "You selected [" << item << "] is this correct?(Y/N)" <<std::endl;
+		std::cout << "You selected [" << item << "] is this correct?" <<std::endl;
 		char correctCheck;
 		std::cin >> correctCheck;
 		if (correctCheck == 'Y' || 'y') {
@@ -166,20 +145,7 @@ void handleChoice(std::string item, int maxSpend) {
 			int numTickets;
 			std::cin >> numTickets;
 		//amount spent
-		//
-
-		double menuItemSelectedCost=0;
-		for(int i=0; i < menuItemsList.size(); i++){
-			if(std::get<0>(menuItemsList[i]) == item){
-				menuItemSelectedCost= std::get<1>(menuItemsList[i]);
-
-			}else {
-				std::cout << "no such item" << std::endl;  
-			}
-
-
-		}
-		cart.currentTotal = cart.amountSpent(menuItemSelectedCost, numTickets);
+		cart.currentTotal = cart.amountSpent(cart.getMenuItem(item), numTickets);
 
 		//amount to free tickets
 		double amountToFreeRides = cart.amountToFreeRides(cart.currentTotal, maxSpend);
@@ -199,7 +165,7 @@ void handleChoice(std::string item, int maxSpend) {
 				std::cout << "Great!, how much would you like to buy? " << std::endl;
 				int numTickets;
 				std::cin >> numTickets;
-				handleAddingToCart(cart, numTickets, menuItemSelectedCost);
+				handleAddingToCart(cart, numTickets, cart.getMenuItem(item));
 			}
 
 		}else if (amountToFreeRides == 0) {
